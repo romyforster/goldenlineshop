@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>la boutique de goldenline</title>
+</head>
+<body>
+    <a href="{% url 'index' %}"><h1> Boutique de goldenline</h1></a>
+
+   {% if user.is_authenticated %}
+        {{ user.username}}
+        <a href="{% url 'logout' %}"> Deconnexion</a>
+    {% else %}
+    <a href="{% url 'login' %}">Se connecter</a>
+    <a href="{% url 'signup' %}">S'inscrire</a>
+    
+    {% endif %}
+    
+    
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    
+    {% endif %}
+    
+    {% if user.panier %}
+
+    <p>
+        <a href="{% url 'panier'%}">Voir le panier ({{user.panier.orders.count }})</a>
+    </p>
+    
+    {% endif %}
+    
+    {% block content %}
+
+    {% endblock %}
+    
+</body>
+</html>

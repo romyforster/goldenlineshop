@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+{% for order in orders %}
+
+    <h2>{{ order.produit.nom }}</h2>
+    <img src="{{ order.produit.pic.url }}" alt="{{ order.produit.description }}" srcset="" style="max-width: 250px;">
+    <p>{{ order.quantite }} dans le panier </p>
+    <p>{{order.produit.categorie}}</p>
+{% endfor %}
+
+<h2>Votre Panier</h2>
+  <ul>
+    {% for order in orders %}
+      <li>{{ order.produit.nom }} - {{ order.produit.prix }} x {{ order.quantite }}</li>
+    {% endfor %}
+  </ul>
+  <p>Total des achats : {{ total_achat }}</p>
+
+
+<p><a href="{% url 'valider-achat' %}">Valider achat</a></p>
+<p><a href="{% url 'supprimer-panier' %}">Supprimer panier</a></p>
+
+
+{% endblock %}

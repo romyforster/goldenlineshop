@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <p><h3> Nom produit : </h3> {{ produit.nom }} </p>
+  <p><h3> Prix : </h3> € {{ produit.prix }}  </p>
+  <img src="{{ produit.pic.url }}" alt="{{ produit.description }}" srcset="" style="max-width: 250px;">
+  <p><h3>type produit :</h3> {{produit.categorie}}</p>
+  <p> <h3>Description :</h3> {{ produit.description }}</p>
+  <p> <h3>Quantité en stock :</h3> {{ produit.en_stock}} </p>
+
+  {% if user.is_authenticated %}
+  <p><a href="{% url 'ajouter-produit' produit.slug %}">Ajouter au panier</a></p>
+  {% endif %}
+
+{% endblock %}
